@@ -1,3 +1,7 @@
+import { WEEK_DAYS } from './_consts.ts';
+
+export type WeekDay = (typeof WEEK_DAYS)[number];
+
 function safeTimeZone(timezone?: string): string {
 	if (timezone == null || timezone.trim() === '') {
 		return Intl.DateTimeFormat().resolvedOptions().timeZone ?? 'UTC';
@@ -80,6 +84,25 @@ export function toMonthKey(timestamp: string, timezone?: string): string {
 	});
 	const [year, month] = formatter.format(date).split('-');
 	return `${year}-${month}`;
+}
+
+export function toWeekKey(
+	timestamp: string,
+	timezone?: string,
+	startOfWeek: WeekDay = 'sunday',
+): string {
+	const dateKey = toDateKey(timestamp, timezone);
+	const [yearStr = '0', monthStr = '1', dayStr = '1'] = dateKey.split('-');
+	const year = Number.parseInt(yearStr, 10);
+	const month = Number.parseInt(monthStr, 10);
+	const day = Number.parseInt(dayStr, 10);
+	const date = new Date(Date.UTC(year, month - 1, day));
+	const currentDay = date.getUTCDay();
+	const startDay = WEEK_DAYS.indexOf(startOfWeek);
+	const diff = (currentDay - startDay + 7) % 7;
+	date.setUTCDate(date.getUTCDate() - diff);
+
+	return date.toISOString().slice(0, 10);
 }
 
 export function formatDisplayMonth(monthKey: string, locale?: string, _timezone?: string): string {

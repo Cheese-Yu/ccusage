@@ -12,3 +12,13 @@ export const DEFAULT_PRECISION = 2;
 export const MILLION = 1_000_000;
 
 export const PRICING_CACHE_TTL_MS = 1000 * 60 * 5; // 5 minutes
+
+export const WEEK_DAYS = [
+	'sunday',
+	'monday',
+	'tuesday',
+	'wednesday',
+	'thursday',
+	'friday',
+	'saturday',
+] as const;
