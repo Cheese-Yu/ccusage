@@ -55,7 +55,11 @@ export const lastCommand = define({
 		}
 
 		if (events.length === 0) {
-			log(jsonOutput ? JSON.stringify({ daily: [], totals: null }) : 'No Codex usage data found.');
+			log(
+				jsonOutput
+					? JSON.stringify({ daily: [], totals: null, range: { since, until, day: ctx.values.day } })
+					: `No Codex usage data found for last ${ctx.values.day} days (excluding today). Range: ${since} to ${until}.`,
+			);
 			return;
 		}
 
@@ -74,8 +78,8 @@ export const lastCommand = define({
 			if (rows.length === 0) {
 				log(
 					jsonOutput
-						? JSON.stringify({ daily: [], totals: null })
-						: 'No Codex usage data found for the selected recent days.',
+						? JSON.stringify({ daily: [], totals: null, range: { since, until, day: ctx.values.day } })
+						: `No Codex usage data found for last ${ctx.values.day} days (excluding today). Range: ${since} to ${until}.`,
 				);
 				return;
 			}
