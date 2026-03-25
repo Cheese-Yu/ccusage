@@ -171,6 +171,10 @@ if (import.meta.vitest != null) {
 
 		it('throws when day is invalid', () => {
 			expect(() => getLastNDaysDateRange(0)).toThrow('Invalid day value');
+			expect(() => getLastNDaysDateRange(-1)).toThrow('Invalid day value');
+			expect(() => getLastNDaysDateRange(1.5)).toThrow('Invalid day value');
+			expect(() => getLastNDaysDateRange(Number.NaN)).toThrow('Invalid day value');
+			expect(() => getLastNDaysDateRange('10' as unknown as number)).toThrow('Invalid day value');
 		});
 	});
 }
