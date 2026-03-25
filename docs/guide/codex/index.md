@@ -67,6 +67,7 @@ When Codex emits a model alias (for example `gpt-5-codex`), the CLI automaticall
 ## Next Steps
 
 - [Daily report command](./daily.md)
+- [Last N days report command](./last.md)
 - [Monthly report command](./monthly.md)
 - [Session report command](./session.md)
 - Additional reports will mirror the ccusage CLI as the Codex tooling stabilizes.
