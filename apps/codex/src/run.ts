@@ -4,11 +4,13 @@ import { description, name, version } from '../package.json';
 import { dailyCommand } from './commands/daily.ts';
 import { monthlyCommand } from './commands/monthly.ts';
 import { sessionCommand } from './commands/session.ts';
+import { lastCommand } from './commands/last.ts';
 
 const subCommands = new Map([
 	['daily', dailyCommand],
 	['monthly', monthlyCommand],
 	['session', sessionCommand],
+	['last', lastCommand],
 ]);
 
 const mainCommand = dailyCommand;
